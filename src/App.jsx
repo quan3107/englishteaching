@@ -10,7 +10,7 @@ function App() {
       <Container maxWidth={false} disableGutters sx={{ mt: 4, mb: 4 }}>
         <Paper elevation={3} sx={{ p: 3, mt: 3, borderRadius: 0 }}>
           <Typography variant="h3" component="h1" gutterBottom>
-            Welcome to Nhi Chau Education
+            Welcome to Nhi Chau
           </Typography>
           <Typography variant="body1" paragraph>
             Explore our courses and resources to enhance your learning journey!
