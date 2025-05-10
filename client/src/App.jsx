@@ -1,6 +1,7 @@
 import './App.css'
 import Navbar from './components/Navbar'
 import { Container, Typography, Paper } from '@mui/material'
+import Footer from './components/Footer'
 
 function App() {
 
@@ -17,6 +18,7 @@ function App() {
           </Typography>
         </Paper>
       </Container>
+      <Footer />
     </div>
   )
 }
