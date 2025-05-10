@@ -15,7 +15,7 @@ function App() {
           </Typography>
           <Typography variant="body1" paragraph>
             Explore our courses and resources to enhance your learning journey!
-          </Typography>
+          </Typography>git 
         </Paper>
       </Container>
       <Footer />
