@@ -57,7 +57,7 @@ function Navbar() {
               textDecoration: 'none',
             }}
           >
-            NHI CHAU EDU
+            NCE
           </Typography>
 
           {/* Mobile menu */}

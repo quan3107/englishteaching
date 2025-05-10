@@ -16,7 +16,7 @@ function Footer() {
         <Grid container spacing={4}>
           <Grid item xs={12} sm={4}>
             <Typography variant="h6" gutterBottom>
-              Nhi Chau Education
+              Nhi Chau English
             </Typography>
             <Typography variant="body2">
               Providing quality English education 
@@ -61,7 +61,7 @@ function Footer() {
         <Divider sx={{ my: 2, backgroundColor: 'rgba(255,255,255,0.2)' }} />
         
         <Typography variant="body2" align="center" sx={{ pt: 2 }}>
-          © {new Date().getFullYear()} Nhi Chau Education. All rights reserved.
+          © {new Date().getFullYear()} NCE. All rights reserved.
         </Typography>
       </Container>
     </Box>

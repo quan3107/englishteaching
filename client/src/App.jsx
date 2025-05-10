@@ -8,14 +8,15 @@ function App() {
   return (
     <div className="app-container">
       <Navbar />
-      <Container maxWidth={false} disableGutters sx={{ mt: 4, mb: 4 }}>
+      <Container maxWidth={false} disableGutters sx={{  minHeight: "60vh", flexGrow: 1, mt: 4, mb: 4 }}>
         <Paper elevation={3} sx={{ p: 3, mt: 3, borderRadius: 0 }}>
           <Typography variant="h3" component="h1" gutterBottom>
-            Welcome to Nhi Chau
+            Welcome to Nhi Chau English 
           </Typography>
           <Typography variant="body1" paragraph>
             Explore our courses and resources to enhance your learning journey!
-          </Typography>git 
+          </Typography> 
+          
         </Paper>
       </Container>
       <Footer />
