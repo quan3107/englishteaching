@@ -28,5 +28,5 @@ function Course() {
   );
 }
 
-export default function Course;
+export default Course;
   
