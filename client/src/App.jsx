@@ -3,8 +3,20 @@ import Navbar from './components/Navbar'
 import { Container, Typography, Paper } from '@mui/material'
 import Footer from './components/Footer'
 import Course from './components/Course'
+import { useEffect, useState } from 'react'
+import axios from "axios";
 
 function App() {
+  const [msg, setMsg] = useState("");
+  const fetchAPI = async () => {
+    const response = await axios.get("http://localhost:3000/api");
+    setMsg(response.data.message);
+    console.log(response);
+  }
+
+  useEffect(() => {
+    fetchAPI();
+  }, []);
 
   return (
     <div className="app-container">
@@ -16,7 +28,7 @@ function App() {
       >
         <Paper elevation={3} sx={{ p: 3, mt: 3, borderRadius: 0 }}>
           <Typography variant="h3" component="h1" gutterBottom>
-            Welcome to Nhi Chau English
+            Welcome to Nhi Chau English {msg}
           </Typography>
           <Typography variant="body1" paragraph>
             Explore our courses and resources to enhance your learning journey!

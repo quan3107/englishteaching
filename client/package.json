@@ -7,15 +7,23 @@
     "dev": "vite",
     "build": "vite build",
     "lint": "eslint .",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "toolpad-studio:dev": "toolpad-studio dev ./my-toolpad-app",
+    "toolpad-studio:build": "toolpad-studio build ./my-toolpad-app",
+    "toolpad-studio:start": "toolpad-studio start ./my-toolpad-app"
   },
   "dependencies": {
+    "@emotion/react": "^11.11.4",
+    "@emotion/styled": "^11.11.0",
+    "@mui/icons-material": "^5.15.11",
+    "@mui/material": "^5.15.11",
+    "@tailwindcss/vite": "^4.1.6",
+    "@toolpad/studio": "^0.13.0",
+    "axios": "^1.9.0",
     "react": "^19.0.0",
     "react-dom": "^19.0.0",
-    "@mui/icons-material": "^5.15.11",
-"@mui/material": "^5.15.11",
-"@emotion/react": "^11.11.4",
-"@emotion/styled": "^11.11.0"
+    "react-router": "^7.6.0",
+    "tailwindcss": "^4.1.6"
   },
   "devDependencies": {
     "@eslint/js": "^9.22.0",
