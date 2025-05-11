@@ -1,7 +1,7 @@
 import React from "react";
 import "./login.css";
 
-function Login() {
+function Signup() {
   return (
     <div className="login-container">
       <div className="login-card">
@@ -11,13 +11,13 @@ function Login() {
               <path strokeLinecap="round" strokeLinejoin="round" d="M15.75 6a3.75 3.75 0 1 1-7.5 0 3.75 3.75 0 0 1 7.5 0ZM4.501 20.118a7.5 7.5 0 0 1 14.998 0A17.933 17.933 0 0 1 12 21.75c-2.676 0-5.216-.584-7.499-1.632Z" />
             </svg>
           </div>
-          <h2>Welcome Back</h2>
+          <h2>Welcome to NCE</h2>
         </div>
 
         <form className="login-form" action="#" method="POST">
           <div className="form-group">
             <div className="email-header">
-            <label htmlFor="email">Email address</label>
+                <label htmlFor="email">Email address</label>
             </div>
             <input
               type="email"
@@ -32,7 +32,7 @@ function Login() {
           <div className="form-group">
             <div className="password-header">
               <label htmlFor="password">Password</label>
-              <a href="#" className="forgot-password">Forgot password?</a>
+              
             </div>
             <input
               type="password"
@@ -44,17 +44,9 @@ function Login() {
             />
           </div>
 
-          <div className="remember-me">
-            <input
-              id="remember-me"
-              name="remember-me"
-              type="checkbox"
-            />
-            <label htmlFor="remember-me">Remember me</label>
-          </div>
-
+          
           <button type="submit" className="signin-button">
-            Sign in
+            Sign up
           </button>
         </form>
 
@@ -78,12 +70,12 @@ function Login() {
         </div>
 
         <p className="signup-link">
-          Not a member yet?{" "}
-          <a href="#">Create an account</a>
+          Already a member?{" "}
+          <a href="#">Sign in here</a>
         </p>
       </div>
     </div>
   );
 }
 
-export default Login;
+export default Signup;
