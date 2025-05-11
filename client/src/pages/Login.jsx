@@ -1,7 +1,48 @@
 import React from "react";
 import "./login.css";
+import { useAuth } from "../Routes/Auth";
+import { useNavigate } from "react-router-dom";
 
 function Login() {
+  console.log(useAuth);
+  const { login } = useAuth();
+  const navigate = useNavigate();
+
+  const [userInfo, setUserInfo] = React.useState({
+    email: "",
+    password: "",
+  })
+
+  const [error, setError] = React.useState("");
+
+  function handleChange(event) {
+    const {value, name} = event.target;
+    setUserInfo((prevState) => {
+      return ({
+        ...prevState,
+        [name]: value,
+      })
+    })
+  }
+
+  function handleClick(event) {
+    event.preventDefault();
+    console.log("Login attempt with:", userInfo);
+
+    if (userInfo.email === "dinhquan97@gmail.com" && userInfo.password === "123456") {
+      // Log successful login
+      console.log("Login successful");
+
+      // Call the login function from auth context
+      login(userInfo);
+
+      // Navigate to dashboard after successful login
+      navigate("/");
+    } else {
+      console.log("Login failed: Invalid credentials");
+      setError("Invalid email or password");
+    }
+  }
   return (
     <div className="login-container">
       <div className="login-card">
@@ -17,7 +58,7 @@ function Login() {
         <form className="login-form" action="#" method="POST">
           <div className="form-group">
             <div className="email-header">
-            <label htmlFor="email">Email address</label>
+                <label htmlFor="email">Email address</label>
             </div>
             <input
               type="email"
@@ -26,6 +67,8 @@ function Login() {
               autoComplete="email"
               required
               placeholder="your@email.com"
+              onChange={handleChange}
+              value={userInfo.email}
             />
           </div>
 
@@ -41,6 +84,8 @@ function Login() {
               autoComplete="current-password"
               required
               placeholder="••••••••"
+              onChange={handleChange}
+              value={userInfo.password}
             />
           </div>
 
@@ -53,7 +98,13 @@ function Login() {
             <label htmlFor="remember-me">Remember me</label>
           </div>
 
-          <button type="submit" className="signin-button">
+          {error && (
+            <div className="error-message">
+              {error}
+            </div>
+          )}
+
+          <button onClick={handleClick} type="submit" className="signin-button">
             Sign in
           </button>
         </form>

@@ -13,14 +13,25 @@ import Tooltip from '@mui/material/Tooltip';
 import MenuItem from '@mui/material/MenuItem';
 import SchoolIcon from '@mui/icons-material/School';
 import ButtonGroup from '@mui/material/ButtonGroup';
+import { useAuth } from "../Routes/Auth";
+import { useNavigate } from "react-router-dom";
 
 const pages = ['Home', 'Courses', 'About', 'Contact'];
 const settings = ['Profile', 'Account', 'Dashboard', 'Logout'];
 
-function Navbar() {
+function Navbarlogin() {
+
+
+  const {user, logout} = useAuth();
+  const navigate = useNavigate();
+  function handleLogout() {
+    logout();
+    navigate("/");
+  }
   const [anchorElNav, setAnchorElNav] = useState(null);
   const [anchorElUser, setAnchorElUser] = useState(null);
 
+  
   const handleOpenNavMenu = (event) => {
     setAnchorElNav(event.currentTarget);
   };
@@ -135,7 +146,7 @@ function Navbar() {
 
           {/* User menu */}
           <Box sx={{ flexGrow: 0 }}>
-            {/* <Tooltip title="Open settings">
+             <Tooltip title="Open settings">
               <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
                 <Avatar alt="User" src="/static/images/avatar/2.jpg" />
               </IconButton>
@@ -157,15 +168,12 @@ function Navbar() {
               onClose={handleCloseUserMenu}
             >
               {settings.map((setting) => (
-                <MenuItem key={setting} onClick={handleCloseUserMenu}>
+                <MenuItem key={setting} onClick={setting==="Logout" ? handleLogout : handleCloseUserMenu}>
                   <Typography textAlign="center">{setting}</Typography>
                 </MenuItem>
               ))}
-            </Menu> */}
-            <ButtonGroup  variant="contained" aria-label="Disabled button group" sx={{backgroundColor: "brown"}}>
-              <Button href="/login" sx={{backgroundColor: "brown"}}>Login</Button>
-              <Button href="/signup" sx={{backgroundColor: "brown"}}>Signup</Button>
-            </ButtonGroup>
+            </Menu>
+            
 
           </Box>
         </Toolbar>
@@ -174,4 +182,4 @@ function Navbar() {
   );
 }
 
-export default Navbar;
+export default Navbarlogin;
