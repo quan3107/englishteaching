@@ -1,7 +1,42 @@
 import React from "react";
 import "./login.css";
+import axios from "axios";
+import { useNavigate } from "react-router";
 
 function Signup() {
+  const navigate = useNavigate();
+  const [userInfo, setUser] = React.useState({
+    email: "",
+    password: ""
+  });
+
+  function handleChange(e) {
+    const {name, value} = e.target;
+    setUser((prevState) => {
+      return {
+        ...prevState,
+        [name]: value
+
+      }
+    })
+  }
+
+  async function handleClick(e) {
+    e.preventDefault();
+    try {
+      const res = await axios.post("http://localhost:3000/api/signup", 
+        {
+          username: userInfo.email,
+          password: userInfo.password
+        },
+        {withCredentials: true}
+      );
+      
+      console.log(res.data.message);
+    } catch (err) {
+      console.log(err);
+    }
+  }
   return (
     <div className="login-container">
       <div className="login-card">
@@ -26,6 +61,8 @@ function Signup() {
               autoComplete="email"
               required
               placeholder="your@email.com"
+              onChange={handleChange}
+              value={userInfo.email}
             />
           </div>
 
@@ -41,11 +78,13 @@ function Signup() {
               autoComplete="current-password"
               required
               placeholder="••••••••"
+              onChange={handleChange}
+              value={userInfo.password}
             />
           </div>
 
           
-          <button type="submit" className="signin-button">
+          <button onClick={handleClick} type="submit" className="signin-button">
             Sign up
           </button>
         </form>
