@@ -2,6 +2,7 @@ import React from "react";
 import "./login.css";
 import { useAuth } from "../Routes/Auth";
 import { useNavigate } from "react-router-dom";
+import axios from "axios";
 
 function Login() {
   console.log(useAuth);
@@ -25,23 +26,29 @@ function Login() {
     })
   }
 
-  function handleClick(event) {
+  async function handleClick(event) {
     event.preventDefault();
     console.log("Login attempt with:", userInfo);
+    try {
+      const res = await axios.post("http://localhost:3000/api/login", 
+        {
+          username: userInfo.email,
+          password: userInfo.password
+        },
+        {withCredentials: true}
+      );
 
-    if (userInfo.email === "dinhquan97@gmail.com" && userInfo.password === "123456") {
-      // Log successful login
-      console.log("Login successful");
-
-      // Call the login function from auth context
+      console.log(res.data);
       login(userInfo);
-
-      // Navigate to dashboard after successful login
       navigate("/");
-    } else {
-      console.log("Login failed: Invalid credentials");
-      setError("Invalid email or password");
+
+    } catch (err) {
+      console.log(err);
+      setError(err.response?.data?.message ||"Invalid email or password");
     }
+
+    
+   
   }
   return (
     <div className="login-container">
