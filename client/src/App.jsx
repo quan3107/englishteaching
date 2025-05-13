@@ -11,6 +11,7 @@ import Login from "./pages/Login";
 import Signup from "./pages/Signup";
 import HomeLogin from "./pages/HomeLogin";
 import { useAuth, AuthProvider } from "./Routes/Auth";
+import Dashboard from "./pages/Dashboard";
 
 function AppRoutes() {
   const { user } = useAuth();
@@ -20,6 +21,7 @@ function AppRoutes() {
       <Route path="/" element={user ? <HomeLogin /> : <Home />} />
       <Route path="/login" element={user ? <HomeLogin /> : <Login />} />
       <Route path="/signup" element={user ? <HomeLogin /> : <Signup />} />
+      <Route path="/dashboard" element={user ? <Dashboard /> : <Login />} />
     </Routes>
   );
 }

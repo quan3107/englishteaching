@@ -15,6 +15,7 @@ import SchoolIcon from '@mui/icons-material/School';
 import ButtonGroup from '@mui/material/ButtonGroup';
 import { useAuth } from "../Routes/Auth";
 import { useNavigate } from "react-router-dom";
+import axios from 'axios';
 
 const pages = ['Home', 'Courses', 'About', 'Contact'];
 const settings = ['Profile', 'Account', 'Dashboard', 'Logout'];
@@ -24,10 +25,45 @@ function Navbarlogin() {
 
   const {user, logout} = useAuth();
   const navigate = useNavigate();
-  function handleLogout() {
-    logout();
-    navigate("/");
+
+  function handleClick(setting) {
+    switch (setting) {
+      case "Profile":
+        navigate("/");
+        break;
+      case "Account":
+        navigate("/");
+        break;
+      case "Dashboard":
+        handleDashboard();
+        break;
+      case "Logout":
+        handleLogout();
+        break;
+      default:
+        break;
+    }
+
   }
+  async function handleLogout() {
+    try {
+      const res = await axios.post("http://localhost:3000/api/logout", {}, 
+        {withCredentials: true}
+      )
+      console.log(res.data.message)
+      logout();
+      navigate("/");
+    } catch (err) {
+      console.log(err);
+    }
+    
+  }
+
+  async function handleDashboard() {
+    navigate("/dashboard");
+    
+  }
+
   const [anchorElNav, setAnchorElNav] = useState(null);
   const [anchorElUser, setAnchorElUser] = useState(null);
 
@@ -168,7 +204,7 @@ function Navbarlogin() {
               onClose={handleCloseUserMenu}
             >
               {settings.map((setting) => (
-                <MenuItem key={setting} onClick={setting==="Logout" ? handleLogout : handleCloseUserMenu}>
+                <MenuItem key={setting} onClick={() => {handleClick(setting)}}>
                   <Typography textAlign="center">{setting}</Typography>
                 </MenuItem>
               ))}
