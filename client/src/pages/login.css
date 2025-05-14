@@ -11,6 +11,29 @@
   --success-color: #2ecc71;
 }
 
+.dashboard-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  min-height: 100vh;
+  background: linear-gradient(135deg, #e0f7fa 0%, #b2ebf2 100%);
+  padding: 20px;
+}
+
+.dashboard-card {
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  background: linear-gradient(135deg, #e0f7fa 0%, #b2ebf2 100%);
+  
+  border-radius: 10px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+  padding: 30px;
+  border: 1px solid rgba(0, 0, 0, 0.05);
+}
 .login-container {
   display: flex;
   justify-content: center;
