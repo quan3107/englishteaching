@@ -9,7 +9,7 @@ import db from "./routes/db-access.js";
 
 function initializePassport(passport) {
     passport.use("local", 
-        new Strategy(async function verify(username, password, cb) {
+        new Strategy(async function verify(username, password, firstName, lastName, tel, address, cb) {
             // if (username === "dinhquan97@gmail.com" && password === "123456") {
             //     return cb(null, {email: "dinhquan97@gmail.com", password: "123456"});
             // } else {

@@ -4,7 +4,7 @@ const router = express.Router();
 
 router.use((req, res, next) => {
     if (req.isAuthenticated()) {
-        next();
+        res.json({message: "you are logged in"})
     } else {
         res.json({message: "you are not logged in"})
     }

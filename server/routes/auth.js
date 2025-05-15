@@ -5,6 +5,7 @@ import bcrypt from "bcrypt";
 import db from "./db-access.js";
 
 const router = express.Router();
+const saltRounds = 10;
 
 router.get("/api/check-auth", (req, res) => {
     if (req.isAuthenticated()) {
@@ -32,6 +33,11 @@ router.post("/api/signup", async (req, res) => {
     console.log(req.body);
     const email = req.body.username;
     const password = req.body.password;
+    const firstName = req.body.firstName;
+    const lastName = req.body.lastName;
+    const tel = req.body.tel;
+    const address = req.body.address;
+
     try {
         const checkResult = await db.query("SELECT * FROM students WHERE email = $1", [email,])
         if (checkResult.rows.length > 0) {
@@ -44,7 +50,7 @@ router.post("/api/signup", async (req, res) => {
                     console.log("Error hasing password: ", err);
                 } else {
                     const result = await db.query(
-                        "INSERT INTO students (email, password) VALUES ($1, $2) RETURNING *", [email, hash]
+                        "INSERT INTO students (email, password, firstname, lastname, tel, address) VALUES ($1, $2, $3, $4, $5, $6) RETURNING *", [email, hash, firstName, lastName, tel, address]
                     );
                     res.json({message: "Success"});
                     // res.sendStatus(201);
