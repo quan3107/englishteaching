@@ -6,8 +6,13 @@ import { useNavigate } from "react-router";
 function Signup() {
   const navigate = useNavigate();
   const [userInfo, setUser] = React.useState({
+    fName: "",
+    lName: "",
+    address: "",
+    tel: "",
     email: "",
-    password: ""
+    password: "",
+
   });
 
   function handleChange(e) {
@@ -27,7 +32,11 @@ function Signup() {
       const res = await axios.post("http://localhost:3000/api/signup", 
         {
           username: userInfo.email,
-          password: userInfo.password
+          password: userInfo.password,
+          firstName: userInfo.fName,
+          lastName: userInfo.lName,
+          tel: userInfo.tel, 
+          address: userInfo.address
         },
         {withCredentials: true}
       );
@@ -51,6 +60,67 @@ function Signup() {
 
         <form className="login-form" action="#" method="POST">
           <div className="form-group">
+            <div className="email-header">
+                <label htmlFor="fName">First Name</label>
+            </div>
+            <input
+              type="text"
+              name="fName"
+              id="fName"
+              autoComplete="on"
+              required
+              placeholder="First Name"
+              onChange={handleChange}
+              value={userInfo.fName}
+            />
+          </div>
+          <div className="form-group">
+            <div className="email-header">
+                <label htmlFor="lName">Last Name</label>
+            </div>
+            <input
+              type="text"
+              name="lName"
+              id="lName"
+              autoComplete="on"
+              required
+              placeholder="Last Name"
+              onChange={handleChange}
+              value={userInfo.lName}
+            />
+          </div>
+          <div className="form-group">
+            <div className="email-header">
+                <label htmlFor="tel">Phone Number</label>
+            </div>
+            <input
+              type="text"
+              name="tel"
+              id="tel"
+              autoComplete="on"
+              required
+              placeholder="#### ### ###"
+              onChange={handleChange}
+              value={userInfo.tel}
+            />
+          </div>
+          <div className="form-group">
+            <div className="email-header">
+                <label htmlFor="address">Current Address</label>
+            </div>
+            <input
+              type="text"
+              name="address"
+              id="address"
+              autoComplete="on"
+              required
+              placeholder="Address"
+              onChange={handleChange}
+              value={userInfo.address}
+            />
+          </div>
+          <div className="form-group">
+            
             <div className="email-header">
                 <label htmlFor="email">Email address</label>
             </div>

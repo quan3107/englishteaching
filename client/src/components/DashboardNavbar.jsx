@@ -2,17 +2,31 @@ import React, {useState} from "react";
 import { Link } from "react-router-dom";
 import {useAuth} from "../Routes/Auth";
 import "./styles/dashboard-navbar.css";
+import { useNavigate } from "react-router-dom";
+import axios from "axios";
 
 function DashboardNavbar() {
     const [sideBarOpen, setSideBar] = useState(false);
     const {user, logout} = useAuth();
+
+    const navigate = useNavigate();
 
     function toggleSideBar() {
         setSideBarOpen(!sideBarOpen);
     }
 
     async function handleLogout() {
-        await logout();
+        try {
+          const res = await axios.post("http://localhost:3000/api/logout", {}, 
+            {withCredentials: true}
+          );
+          console.log(res.data.message);
+          logout();
+          navigate("/");
+          
+        } catch (err) {
+          console.log(err);
+        }
     }
 
     const firstName = user?.name?.split(' ')[0] || "Student";
@@ -107,7 +121,7 @@ function DashboardNavbar() {
             </button>
 
             <div className="header-title">
-              <h1>Welcome, {firstName}</h1>
+              <h1 className="caveat-h1">Warmly welcome to NCE, {firstName}</h1>
             </div>
 
             <div className="header-actions">

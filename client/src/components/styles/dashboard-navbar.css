@@ -1,4 +1,5 @@
 /* Dashboard NavBar Styles */
+@import url('https://fonts.googleapis.com/css2?family=Caveat:wght@400..700&family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&family=Playwrite+DK+Loopet:wght@100..400&display=swap');
 :root {
   --primary-color: #3a9eaa;
   --primary-dark: #2c7a83;
@@ -240,8 +241,16 @@
 
 .header-title h1 {
   margin: 0;
-  font-size: 1.2rem;
+  
   color: var(--text-color);
+}
+
+.caveat-h1 {
+  font-family: "Caveat", cursive;
+  font-size: 1.4rem;
+  
+  font-weight: 1200;
+  font-style: normal;
 }
 
 .header-actions {

@@ -14,13 +14,14 @@ import MenuItem from '@mui/material/MenuItem';
 import SchoolIcon from '@mui/icons-material/School';
 import ButtonGroup from '@mui/material/ButtonGroup';
 
+
 const pages = ['Home', 'Courses', 'About', 'Contact'];
 const settings = ['Profile', 'Account', 'Dashboard', 'Logout'];
 
 function Navbar() {
   const [anchorElNav, setAnchorElNav] = useState(null);
   const [anchorElUser, setAnchorElUser] = useState(null);
-
+  
   const handleOpenNavMenu = (event) => {
     setAnchorElNav(event.currentTarget);
   };
@@ -38,6 +39,7 @@ function Navbar() {
   };
 
   return (
+    
     <AppBar position="static" sx={{ width: '100%' }}>
       <Container maxWidth={false} disableGutters>
         <Toolbar disableGutters>
