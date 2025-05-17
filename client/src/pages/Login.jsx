@@ -10,13 +10,18 @@ function Login() {
   const navigate = useNavigate();
 
   const [userInfo, setUserInfo] = React.useState({
+    firstname: "",
+    lastname: "",
+    address: "",
+    tel: "",
     email: "",
-    password: "",
+    password: ""
   })
 
   const [error, setError] = React.useState("");
 
   function handleChange(event) {
+    
     const {value, name} = event.target;
     setUserInfo((prevState) => {
       return ({
@@ -37,9 +42,33 @@ function Login() {
         },
         {withCredentials: true}
       );
+      
+      // setUserInfo((prevState) => {
+      //   return ({
+      //     ...prevState,
 
+      //   })
+      // })
       console.log(res.data);
-      login(userInfo);
+      const userData = {
+        firstname: res.data.firstname,
+        lastname: res.data.lastname, 
+        address: res.data.address,
+        tel: res.data.tel,
+        email: res.data.email,
+        password: res.data.password
+      }
+      setUserInfo((prevState) => {
+        return ({
+          
+            ...prevState,
+            userData
+          
+        })
+        
+      });
+      login(userData);
+      
       navigate("/");
 
     } catch (err) {
