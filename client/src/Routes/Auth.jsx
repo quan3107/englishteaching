@@ -16,7 +16,8 @@ export const AuthProvider = ({children}) => {
             });
             console.log(res.data);
             if (res.data.isAuthenticated) {
-                setUser(res.data.user);
+                setUser(res.data.userInformation);
+                
             } else {
                 setUser(null);
             }
@@ -25,7 +26,9 @@ export const AuthProvider = ({children}) => {
             setUser(null);
         }
     };
+    
     checkAuthStatus();
+    console.log(user);
     }, [])
 
     const login = (userData) => setUser(userData);

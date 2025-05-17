@@ -4,10 +4,13 @@ import {useAuth} from "../Routes/Auth";
 import "./styles/dashboard-navbar.css";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
+import DashboardOverview from "./DashboardOverview"; // Import DashboardOverview
+import { Children } from "react";
 
-function DashboardNavbar() {
+function DashboardNavbar({children}) {
     const [sideBarOpen, setSideBar] = useState(false);
     const {user, logout} = useAuth();
+    console.log(user);
 
     const navigate = useNavigate();
 
@@ -32,10 +35,17 @@ function DashboardNavbar() {
     const firstName = user?.name?.split(' ')[0] || "Student";
 
     function getInitials() {
-        if (!user?.name) return "U";
-        const names = user.name.split(' ');
+        const stuName = user.firstname + user.lastname;
+        console.log(stuName);
+        if (!stuName) return "U";
+        const names = stuName.split(" ");
+        console.log(names);
         if (names.length === 1) return names[0].charAt(0).toUpperCase();
-        return (names[0].charAt(0) + names[names.length-1].charAt(0)).toUpperCase();
+        const start = ""
+        const initials = names.map((name) => name.charAt(0).toUpperCase()).join("");
+        console.log(initials);
+        // return (names[0].charAt(0) + names[names.length-1].charAt(0)).toUpperCase();
+        return initials;
     }
 
     return (
@@ -52,7 +62,7 @@ function DashboardNavbar() {
           <div className="sidebar-user">
             <div className="user-avatar">{getInitials()}</div>
             <div className="user-info">
-              <h3 className="user-name">{user?.name || "Student"}</h3>
+              <h3 className="user-name">{user?.lastname || "Student"}</h3>
               <p className="user-email">{user?.email || "Student@nce.com"}</p>
             </div>
           </div>
@@ -121,7 +131,7 @@ function DashboardNavbar() {
             </button>
 
             <div className="header-title">
-              <h1 className="caveat-h1">Warmly welcome to NCE, {firstName}</h1>
+              <h1 className="caveat-h1">Warmly welcome to NCE, {user.lastname}</h1>
             </div>
 
             <div className="header-actions">
@@ -163,7 +173,7 @@ function DashboardNavbar() {
           {/* Dashboard content will go here */}
           <main className="dashboard-content">
             {/* This is where dashboard content will be rendered */}
-            
+            {children}
           </main>
         </div>
       </div>
