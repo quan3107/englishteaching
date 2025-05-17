@@ -9,7 +9,8 @@ const saltRounds = 10;
 
 router.get("/api/check-auth", (req, res) => {
     if (req.isAuthenticated()) {
-        res.json({isAuthenticated: true, user: req.user});
+        console.log(req.user);
+        res.json({isAuthenticated: true, userInformation: req.user});
     } else {
         res.json({isAuthenticated: false})
     }
@@ -25,8 +26,9 @@ router.post("/api/logout", (req, res) => {
 })
 
 router.post("/api/login", passport.authenticate("local"), (req, res) => {
+    //console.log(req.user);
     console.log(req.user);
-    res.json({user:req.user})
+    res.json(req.user)
 })
 
 router.post("/api/signup", async (req, res) => {

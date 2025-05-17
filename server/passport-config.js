@@ -8,15 +8,15 @@ import db from "./routes/db-access.js";
 
 
 function initializePassport(passport) {
-    passport.use("local", 
-        new Strategy(async function verify(username, password, firstName, lastName, tel, address, cb) {
+    passport.use("local",
+        new Strategy(async function verify(username, password, cb) {
             // if (username === "dinhquan97@gmail.com" && password === "123456") {
             //     return cb(null, {email: "dinhquan97@gmail.com", password: "123456"});
             // } else {
             //     return cb(null, false);
             // }
             try {
-                const result = await db.query("SELECT * FROM students WHERE email = $1", [username,]);
+                const result = await db.query("SELECT * FROM students WHERE email = $1", [username]);
                 if (result.rows.length > 0) {
                     const user = result.rows[0];
                     const storedHasedPassword = user.password;
@@ -32,10 +32,11 @@ function initializePassport(passport) {
                         }
                     });
                 } else {
-                    return cb("User not found");
+                    return cb(null, false, { message: "User not found" });
                 }
             } catch (err) {
                 console.log(err);
+                return cb(err);
             }
         })
     )
@@ -43,7 +44,7 @@ function initializePassport(passport) {
     passport.serializeUser((user, cb) => {
         cb(null, user);
     })
-    
+
     passport.deserializeUser((user, cb) => {
         cb(null, user);
     });
