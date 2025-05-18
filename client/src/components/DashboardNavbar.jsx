@@ -6,8 +6,9 @@ import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import DashboardOverview from "./DashboardOverview"; // Import DashboardOverview
 import { Children } from "react";
+import { Outlet } from "react-router-dom";
 
-function DashboardNavbar({children}) {
+function DashboardNavbar() {
     const [sideBarOpen, setSideBar] = useState(false);
     const {user, logout} = useAuth();
     console.log(user);
@@ -173,7 +174,7 @@ function DashboardNavbar({children}) {
           {/* Dashboard content will go here */}
           <main className="dashboard-content">
             {/* This is where dashboard content will be rendered */}
-            {children}
+            <Outlet />
           </main>
         </div>
       </div>

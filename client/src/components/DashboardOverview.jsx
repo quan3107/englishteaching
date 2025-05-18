@@ -2,7 +2,7 @@ import React from 'react';
 import './styles/DashboardOverview.css';
 import { useAuth } from '../Routes/Auth'; // Assuming AuthContext provides user data
 
-// Placeholder icons (you can use SVGs or an icon library like react-icons)
+// Placeholder icons (use SVGs or an icon library like react-icons)
 const BookIcon = () => <svg viewBox="0 0 24 24" fill="currentColor" width="24" height="24"><path d="M18 2H6c-1.1 0-2 .9-2 2v16c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2zM6 4h5v8l-2.5-1.5L6 12V4z"></path></svg>;
 const AssignmentIcon = () => <svg viewBox="0 0 24 24" fill="currentColor" width="24" height="24"><path d="M19 3h-4.18C14.4 1.84 13.3 1 12 1s-2.4.84-2.82 2H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm-7-.25c.41 0 .75.34.75.75s-.34.75-.75.75-.75-.34-.75-.75.34-.75.75-.75zM19 19H5V5h14v14z"></path><path d="M12 11.5c-1.38 0-2.5 1.12-2.5 2.5s1.12 2.5 2.5 2.5 2.5-1.12 2.5-2.5-1.12-2.5-2.5-2.5zm0 3c-.28 0-.5-.22-.5-.5s.22-.5.5-.5.5.22.5.5-.22.5-.5.5zM10 8h4v2h-4z"></path></svg>;
 const ChartIcon = () => <svg viewBox="0 0 24 24" fill="currentColor" width="24" height="24"><path d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm0 16H5V5h14v14z"></path><path d="M7 10h2v7H7zm4 0h2v7h-2zm4-3h2v10h-2z"></path></svg>;
@@ -11,9 +11,9 @@ const BellIcon = () => <svg viewBox="0 0 24 24" fill="currentColor" width="24" h
 
 function DashboardOverview() {
   const { user } = useAuth();
-  const firstName = user?.name?.split(' ')[0] || user?.lastname || 'Student';
+  const firstName = user?.lastname || 'Student';
 
-  // Dummy data - replace with actual data from your backend or state
+  // Dummy data - replace with actual data from backend or state
   const stats = [
     { id: 1, title: 'Courses Enrolled', value: '5', icon: <BookIcon />, trend: '+1 this month' },
     { id: 2, title: 'Assignments Due', value: '3', icon: <AssignmentIcon />, trend: '2 in next 7 days' },
