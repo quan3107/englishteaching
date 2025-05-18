@@ -5,13 +5,16 @@ import Footer from "./components/Footer";
 import Course from "./components/Course";
 import { useEffect, useState } from "react";
 import axios from "axios";
-import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import { BrowserRouter as Router, Routes, Route, Navigate } from "react-router-dom";
 import Home from "./pages/Home";
 import Login from "./pages/Login";
 import Signup from "./pages/Signup";
 import HomeLogin from "./pages/HomeLogin";
 import { useAuth, AuthProvider } from "./Routes/Auth";
 import Dashboard from "./pages/Dashboard";
+import DashboardNavbar from "./components/DashboardNavbar";
+import DashboardOverview from "./components/DashboardOverview"; // Import DashboardOverview
+
 
 function AppRoutes() {
   const { user } = useAuth();
@@ -19,9 +22,13 @@ function AppRoutes() {
   return (
     <Routes>
       <Route path="/" element={user ? <HomeLogin /> : <Home />} />
-      <Route path="/login" element={user ? <HomeLogin /> : <Login />} />
-      <Route path="/signup" element={user ? <HomeLogin /> : <Signup />} />
-      <Route path="/dashboard" element={user ? <Dashboard /> : <Login />} />
+      <Route path="/login" element={user ? <Navigate replace to = "/" /> : <Login />} />
+      <Route path="/signup" element={user ? <Navigate replace to = "/" /> : <Signup />} />
+      <Route path="/dashboard" element={user ? <DashboardNavbar /> : <Navigate replace to= "/login" />}>
+        <Route index element={<Navigate replace to = "overview" />} />
+        <Route path="overview" element={<DashboardOverview />} />
+        <Route path="courses" element={<Course />} />
+      </Route>
     </Routes>
   );
 }
