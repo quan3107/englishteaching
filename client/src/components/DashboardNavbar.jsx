@@ -1,5 +1,5 @@
 import React, {useState} from "react";
-import { Link } from "react-router-dom";
+import { Link, NavLink } from "react-router-dom";
 import {useAuth} from "../Routes/Auth";
 import "./styles/dashboard-navbar.css";
 import { useNavigate } from "react-router-dom";
@@ -71,44 +71,44 @@ function DashboardNavbar() {
           <nav className="sidebar-nav">
             <ul className="nav-list">
               <li className="nav-item">
-                <Link to="/dashboard" className="nav-link active">
+                <NavLink to="/dashboard/overview" className={({isActive}) => (isActive ? "nav-link active" : "nav-link")}>
                   <svg className="nav-icon" viewBox="0 0 24 24">
                     <path d="M3 13h8V3H3v10zm0 8h8v-6H3v6zm10 0h8V11h-8v10zm0-18v6h8V3h-8z"></path>
                   </svg>
                   Dashboard
-                </Link>
+                </NavLink>
               </li>
               <li className="nav-item">
-                <Link to="/dashboard/courses" className="nav-link">
+                <NavLink to="/dashboard/courses" className={({isActive}) => (isActive ? "nav-link active" : "nav-link")}>
                   <svg className="nav-icon" viewBox="0 0 24 24">
                     <path d="M12 3L1 9l11 6 9-4.91V17h2V9L12 3z M5 13.18v4L12 21l7-3.82v-4L12 17l-7-3.82z"></path>
                   </svg>
                   My Courses
-                </Link>
+                </NavLink>
               </li>
               <li className="nav-item">
-                <Link to="/dashboard/assignments" className="nav-link">
+                <NavLink to="/dashboard/assignments" className={({isActive}) => (isActive ? "nav-link active" : "nav-link")}>
                   <svg className="nav-icon" viewBox="0 0 24 24">
                     <path d="M19 3h-4.18C14.4 1.84 13.3 1 12 1c-1.3 0-2.4.84-2.82 2H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm-7 0c.55 0 1 .45 1 1s-.45 1-1 1-1-.45-1-1 .45-1 1-1zm-2 14l-4-4 1.41-1.41L10 14.17l6.59-6.59L18 9l-8 8z"></path>
                   </svg>
                   Assignments
-                </Link>
+                </NavLink>
               </li>
               <li className="nav-item">
-                <Link to="/dashboard/grades" className="nav-link">
+                <NavLink to="/dashboard/grades" className={({isActive}) => (isActive ? "nav-link active" : "nav-link")}>
                   <svg className="nav-icon" viewBox="0 0 24 24">
                     <path d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm-4 8c0 1.11-.9 2-2 2h-2v2h4v2H9v-4c0-1.11.9-2 2-2h2V9H9V7h4c1.1 0 2 .89 2 2v2z"></path>
                   </svg>
                   Grades
-                </Link>
+                </NavLink>
               </li>
               <li className="nav-item">
-                <Link to="/dashboard/profile" className="nav-link">
+                <NavLink to="/dashboard/profile" className={({isActive}) => (isActive ? "nav-link active" : "nav-link")}>
                   <svg className="nav-icon" viewBox="0 0 24 24">
                     <path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z"></path>
                   </svg>
                   Profile
-                </Link>
+                </NavLink>
               </li>
             </ul>
           </nav>
