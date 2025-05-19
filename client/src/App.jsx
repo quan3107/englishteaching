@@ -13,7 +13,11 @@ import HomeLogin from "./pages/HomeLogin";
 import { useAuth, AuthProvider } from "./Routes/Auth";
 import Dashboard from "./pages/Dashboard";
 import DashboardNavbar from "./components/DashboardNavbar";
-import DashboardOverview from "./components/DashboardOverview"; // Import DashboardOverview
+import DashboardOverview from "./components/DashboardOverview"; 
+import DashboardCourses from "./components/DashboardCourses";
+import DashboardAssignments from "./components/DashboardAssignments";
+import DashboardGrades from "./components/DashboardGrades";
+import DashboardProfile from "./components/DashboardProfile";
 
 
 function AppRoutes() {
@@ -27,7 +31,10 @@ function AppRoutes() {
       <Route path="/dashboard" element={user ? <DashboardNavbar /> : <Navigate replace to= "/login" />}>
         <Route index element={<Navigate replace to = "overview" />} />
         <Route path="overview" element={<DashboardOverview />} />
-        <Route path="courses" element={<Course />} />
+        <Route path="courses" element={<DashboardCourses />} />
+        <Route path="assignments" element = {<DashboardAssignments />} />
+        <Route path="grades" element = {<DashboardGrades />} />
+        <Route path="profile" element = {<DashboardProfile />} />
       </Route>
     </Routes>
   );
