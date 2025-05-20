@@ -16,7 +16,7 @@ router.get("/api/dashboard", (req, res) => {
 })
 
 router.get("/api/dashboard/courses", async (req, res) => {
-    console.log(req.user);
+    //console.log(req.user);
     const studentId = req.user.sid;
     try {
         const result = await db.query("SELECT courses.course_id, courses.title, courses.description FROM courses JOIN enrollments ON courses.course_id=enrollments.course_id WHERE student_id = $1", [studentId])
@@ -31,6 +31,24 @@ router.get("/api/dashboard/courses", async (req, res) => {
         console.log(err);
     }
     
+})
+
+router.get("/api/dashboard/profile", async (req, res) => {
+    console.log(req.user);
+    const studentId = req.user.sid;
+    try {
+        const result = await db.query("SELECT students.firstname, students.lastname, students.address, students.tel, students.email FROM students WHERE sid = $1", [studentId]);
+        console.log(result.rows);
+        if (result.rows.length > 0) {
+            res.json(result.rows[0]);
+
+        } else {
+            res.json({message: "cannot find your profile"});
+        }
+    } catch (err) {
+        console.log(err);
+    }
+
 })
 
 export default router;
