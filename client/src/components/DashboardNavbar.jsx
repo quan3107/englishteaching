@@ -36,7 +36,7 @@ function DashboardNavbar() {
     const firstName = user?.name?.split(' ')[0] || "Student";
 
     function getInitials() {
-        const stuName = user.firstname + user.lastname;
+        const stuName = user.firstname + " " + user.lastname;
         console.log(stuName);
         if (!stuName) return "U";
         const names = stuName.split(" ");
