@@ -51,4 +51,21 @@ router.get("/api/dashboard/profile", async (req, res) => {
 
 })
 
+router.put("/api/dashboard/profile", async(req, res) => {
+    console.log("Updating profile");
+    console.log(req.body);
+    const {firstname, lastname, address, tel, email} = req.body.userInfo;
+    const studentId = req.user.sid;
+    try {
+        const result = await db.query("UPDATE students SET firstname = $1, lastname = $2, address = $3, tel = $4, email = $5 WHERE sid = $6", 
+            [firstname, lastname, address, tel, email, studentId]);
+        res.json({message: "Profile updated"});
+
+    } catch (err) {
+        console.log(err);
+        res.json({message: "Error updating profile"});
+    }
+    
+})
+
 export default router;
