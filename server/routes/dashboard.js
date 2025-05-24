@@ -1,7 +1,10 @@
 import express from "express";
 import db from "./db-access.js";
+import bcrypt from "bcrypt";
+
 
 const router = express.Router();
+const saltRounds = 10;
 
 router.use((req, res, next) => {
     if (req.isAuthenticated()) {
@@ -66,6 +69,44 @@ router.put("/api/dashboard/profile", async(req, res) => {
         res.json({message: "Error updating profile"});
     }
     
+})
+
+router.post("/api/dashboard/profile/change-password", async(req, res) => {
+    console.log("Changing password");
+    console.log(req.body);
+    try {
+        const {currentPassword, newPassword} = req.body;
+        const studentId = req.user.sid;
+        const result = await db.query("SELECT password FROM students WHERE sid = $1", [studentId])
+        console.log(result.rows);
+        if (result.rows.length > 0) {
+            const storedHashedPassword = result.rows[0].password;
+            bcrypt.compare(currentPassword, storedHashedPassword, async (err, valid) => {
+                if (err) {
+                    console.log(err);
+                    res.json({message: err});
+                } else {
+                    if (valid) {
+                        bcrypt.hash(newPassword, saltRounds, async (err, hash) => {
+                            if (err) {
+                                console.log("Error hashing password: ", err);
+                            } else {
+                                await db.query("UPDATE students SET password = $1 WHERE sid = $2", [hash, studentId])
+                                res.json({isSuccess: true, message: "Password updated successfully"})
+                            }
+                        })
+                    } else {
+                        console.log("Invalid password");
+                        res.json({isSuccess: false, message: "Please enter your current password correctly"})
+                    }
+                }
+            })
+            }
+        
+        } catch (err) {
+        res.json({message: "Error changing password: " + err});
+        console.log(err)
+    }
 })
 
 export default router;
