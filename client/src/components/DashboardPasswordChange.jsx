@@ -2,7 +2,7 @@ import React from "react";
 
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
-
+import axios from "axios";
 import { useEffect } from "react";
 import "./styles/DashboardProfile.css";
 
@@ -26,10 +26,31 @@ function DashboardPasswordChange({onCancel, onSuccess}) {
       }));
     }
 
-    function handleSavePassword(event) {
+    async function handleSavePassword(event) {
       console.log(password);
+      if (password.newPassword !== password.confirmPassword) {
+        setError("New Password and Confirm Password do not match");
+        return;
+      } else {
+        try {
+          const res = await axios.post("http://localhost:3000/api/dashboard/profile/change-password", 
+            password,
+            { withCredentials: true}
+          )
+          console.log(res.data);
+          if (res.data.isSuccess) {
+            onSuccess();
+          } else {
+            setError(res.data.message);
+          }
+
+        } catch (err) {
+          console.log(err);
+          setError("Error changing password");
+        }
+      }
       event.preventDefault();
-      onSuccess();
+      
     }    
     
     return (
