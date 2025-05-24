@@ -27,6 +27,7 @@ function DashboardPasswordChange({onCancel, onSuccess}) {
     }
 
     async function handleSavePassword(event) {
+      event.preventDefault();
       console.log(password);
       if (password.newPassword !== password.confirmPassword) {
         setError("New Password and Confirm Password do not match");
@@ -39,6 +40,7 @@ function DashboardPasswordChange({onCancel, onSuccess}) {
           )
           console.log(res.data);
           if (res.data.isSuccess) {
+            setError("");
             onSuccess();
           } else {
             setError(res.data.message);
@@ -49,7 +51,7 @@ function DashboardPasswordChange({onCancel, onSuccess}) {
           setError("Error changing password");
         }
       }
-      event.preventDefault();
+      
       
     }    
     
