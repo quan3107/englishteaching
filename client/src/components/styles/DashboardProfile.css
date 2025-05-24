@@ -100,6 +100,33 @@
 }
 */
 
+.password-change .password-form .form-group {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    
+    margin-bottom: 25px;
+    padding-bottom: 20px;
+    border-bottom: 1px solid #f0f0f0; /* Very light separator */
+}
+
+.password-form label {
+    display: flex; /* This should already align label text to the left */
+    font-weight: 600; /* Bolder labels */
+    margin-bottom: 10px;
+    color: #4a4a4a;
+    font-size: 1em;
+    /* text-align: left; */ /* Add if label text itself is not left-aligned */
+}
+
+.password-form .form-group input {
+    color: #333;
+    background-color: white;
+    font-size: 1em;
+    line-height: 1.6;
+    text-align: left; /* Ensure the text within the input is left-aligned */
+}
+
 .profile-details .detail-item {
     display: flex;
     flex-direction: column;
@@ -161,10 +188,10 @@
     color: white;
 }
 
-.profile-actions {
-    margin-top: 35px;
+.profile-actions, .password-actions {
+    /* margin-top: 35px; */
     padding-top: 25px;
-    border-top: 1px solid #e0e0e0;
+    /* border-top: 1px solid #e0e0e0; */
     display: flex;
     justify-content: flex-end; /* Align buttons to the right */
     gap: 15px; /* Space between action buttons */
