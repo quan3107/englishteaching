@@ -4,6 +4,7 @@ import { useAuth } from "../Routes/Auth";
 import { useEffect } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router";
+import DashboardPasswordChange from "./DashboardPasswordChange";
 
 function DashboardProfile() {
   const { user } = useAuth();
@@ -15,6 +16,7 @@ function DashboardProfile() {
   const [editEmailState, setEditEmailState] = React.useState(false);
   const [editAddressState, setEditAddressState] = React.useState(false);
   const [editTelState, setEditTelState] = React.useState(false);
+  const [showPasswordForm, setShowPasswordForm] = React.useState(false);
   useEffect(() => {
     const fetchUserInfo = async () => {
       try {
@@ -122,42 +124,49 @@ function DashboardProfile() {
     }
   }
 
+  function handlePassword(event) {
+  //   const profileActions = document.getElementById("profileActions");
+  //   const passwordActions = document.getElementById("passwordActions");
+  //   const passwordChange = document.getElementById("passwordChange");
+  //   passwordChange.style.display = "block";
+  //   profileActions.style.display = "none";
+  //   passwordActions.style.display = "flex";
+  // }
+    setShowPasswordForm(true);
+  }
+    function handleSavePassword(event) {
+    setShowPasswordForm(false);  // This should hide the form after saving
+    
+    // try {
+    //   const res = await axios.put(
+    //     "http://localhost:3000/api/dashboard/profile",
+    //     { currentPassword, newPassword },
+    //     { withCredentials: true }
+    //   );
+    //   console.log(res.data);
+    //   navigate("/dashboard/profile");
+    // } catch (err) {
+    //   console.log(err);
+    // }
+  }
+  function handleCancelPassword() {
+    setShowPasswordForm(false);
+  }
+
+  function handleCancel(event) {
+    // const profileActions = document.getElementById("profileActions");
+    // const passwordActions = document.getElementById("passwordActions");
+    // const passwordChange = document.getElementById("passwordChange");
+    // passwordChange.style.display = "none";
+    // profileActions.style.display = "flex";
+    // passwordActions.style.display = "none";
+  }
+
   return (
     <div className="dashboard-profile">
       <div className="profile-container">
         <h2>My Profile</h2>
         <div className="profile-header">
-          <div className="password-change" style={{display: "none"}}>
-            <h3>Change Password</h3>
-            <form className="password-form" action="#" method="POST">
-              <div className="form-group">
-                <label htmlFor="currentPassword">Current Password</label>
-                <input
-                  type="password"
-                  name="currentPassword"
-                  id="currentPassword"
-                  required
-                  placeholder="Current Password"
-                />
-                <label htmlFor="newPassword">New Password</label>
-                <input
-                  type="password"
-                  name="newPassword"
-                  id="newPassword"
-                  required
-                  placeholder="New Password"
-                />
-                <label htmlFor="confirmPassword">Confirm Password</label>
-                <input
-                  type="password"
-                  name="confirmPassword"
-                  id="confirmPassword"
-                  required
-                  placeholder="Confirm Password"
-                />
-              </div>
-            </form>
-          </div>
           <div className="profile-avatar">
             <img src={placeholderUser.profileImageUrl} alt="Profile" />
             <button
@@ -177,8 +186,43 @@ function DashboardProfile() {
             {/* {placeholderUser.program && <p className="program">Program: {placeholderUser.program}</p>} */}
           </div>
         </div>
-
-        <div className="profile-details">
+        {/* <div
+          id="passwordChange"
+          className="password-change"
+          style={{ display: "none" }}
+        >
+          <h3>Change Password</h3>
+          <form className="password-form" action="#" method="POST">
+            <div className="form-group">
+              <label htmlFor="currentPassword">Current Password</label>
+              <input
+                type="password"
+                name="currentPassword"
+                id="currentPassword"
+                required
+                placeholder="Current Password"
+              />
+              <label htmlFor="newPassword">New Password</label>
+              <input
+                type="password"
+                name="newPassword"
+                id="newPassword"
+                required
+                placeholder="New Password"
+              />
+              <label htmlFor="confirmPassword">Confirm Password</label>
+              <input
+                type="password"
+                name="confirmPassword"
+                id="confirmPassword"
+                required
+                placeholder="Confirm Password"
+              />
+            </div>
+          </form>
+        </div> */}
+        {!showPasswordForm ? (
+          <div id="profileDetails" className="profile-details">
           <div className="detail-item">
             <label htmlFor="fullNameInput">Full Name</label>
             <div className="value-edit">
@@ -199,19 +243,7 @@ function DashboardProfile() {
                 className="edit-btn"
                 aria-label="Edit Full Name"
                 onClick={() => {
-                  // Logic to toggle input field for editing
-                  // const display = document.getElementById("fullNameDisplay");
-                  // const input = document.getElementById("fullNameInput");
-                  // if (display.style.display === "none") {
-                  //   display.style.display = "inline";
-                  //   input.style.display = "none";
-                  //   document.getElementById("fullNameBtn").innerText = "Edit";
-                  // } else {
-                  //   display.style.display = "none";
-                  //   input.style.display = "inline";
-                  //   document.getElementById("fullNameBtn").innerText = "Done";
-                  //   input.focus();
-                  // }
+                 
                   toggleEdit("fullName");
                 }}
               >
@@ -279,7 +311,6 @@ function DashboardProfile() {
                 name="tel"
                 onChange={handleChange}
                 style={{ display: "none" }}
-                
               />
               <button
                 id="telBtn"
@@ -295,12 +326,31 @@ function DashboardProfile() {
               </button>
             </div>
           </div>
+          <div id="profileActions" className="profile-actions">
+            <button className="action-btn primary" onClick={handleSave}>
+              Save Changes
+            </button>
+            <button className="action-btn secondary" onClick={handlePassword}>
+              Change Password
+            </button>
+          </div>
         </div>
 
-        <div className="profile-actions">
-          <button className="action-btn primary" onClick={handleSave}>Save Changes</button>
-          <button className="action-btn secondary">Change Password</button>
-        </div>
+        ) : (<DashboardPasswordChange onCancel={handleCancelPassword} onSuccess={handleCancelPassword}/>)}
+       
+
+        {/* <div
+          id="passwordActions"
+          className="password-actions"
+          style={{ display: "none" }}
+        >
+          <button className="action-btn primary" onClick={handleSavePassword}>
+            Save Password
+          </button>
+          <button className="action-btn secondary" onClick={handleCancel}>
+            Cancel
+          </button>
+        </div> */}
       </div>
     </div>
   );
