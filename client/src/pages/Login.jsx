@@ -51,12 +51,14 @@ function Login() {
       // })
       console.log(res.data);
       const userData = {
+        sid: res.data.sid,
         firstname: res.data.firstname,
         lastname: res.data.lastname, 
         address: res.data.address,
         tel: res.data.tel,
         email: res.data.email,
-        password: res.data.password
+        password: res.data.password,
+        role: res.data.role
       }
       setUserInfo((prevState) => {
         return ({
