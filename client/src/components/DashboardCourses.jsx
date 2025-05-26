@@ -60,7 +60,12 @@ function DashboardCourses() {
                                     <span>Instructor: {course.instructor_name || "N/A"}</span>
                                     <span>Progress: {course.progress || 0}%</span>
                                 </div>
-                                <button className="continue-btn">Continue Learning</button>
+                                <button
+                                    onClick={() => navigate("/courses/" + course.course_id)} 
+                                    className="continue-btn"
+                                >
+                                    Continue Learning
+                                </button>
                             </div>
                         </div>
                     ))}
