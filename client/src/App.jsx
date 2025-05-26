@@ -18,6 +18,7 @@ import DashboardCourses from "./components/DashboardCourses";
 import DashboardAssignments from "./components/DashboardAssignments";
 import DashboardGrades from "./components/DashboardGrades";
 import DashboardProfile from "./components/DashboardProfile";
+import CourseContentPage from "./components/CourseContentPage";
 
 
 function AppRoutes() {
@@ -36,6 +37,9 @@ function AppRoutes() {
         <Route path="grades" element = {<DashboardGrades />} />
         <Route path="profile" element = {<DashboardProfile />} />
       </Route>
+      <Route path="/courses/:courseId" element={<CourseContentPage />} />
+      <Route path="/courses/:courseId/lesson/:lessonId" element={<CourseContentPage />} />
+
     </Routes>
   );
 }
