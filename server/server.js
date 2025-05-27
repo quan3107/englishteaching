@@ -11,6 +11,7 @@ import db from "./routes/db-access.js";
 import initializePassport from "./passport-config.js";
 import auth from "./routes/auth.js";
 import dashboard from "./routes/dashboard.js";
+import course from "./routes/course.js";
 
 
 const app = express();
@@ -66,6 +67,7 @@ app.get("/api", (req, res) => {
 
 app.use("/", auth);
 app.use("/", dashboard);
+app.use("/", course)
 // app.get("/api/check-auth", (req, res) => {
 //     if (req.isAuthenticated()) {
 //         res.json({isAuthenticated: true, user: req.user});
