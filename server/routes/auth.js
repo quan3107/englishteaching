@@ -8,6 +8,7 @@ const router = express.Router();
 const saltRounds = 10;
 
 router.get("/api/check-auth", (req, res) => {
+    console.log("Checking authentication status");
     if (req.isAuthenticated()) {
         console.log(req.user);
         res.json({isAuthenticated: true, userInformation: req.user});
