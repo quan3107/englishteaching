@@ -12,6 +12,7 @@ import initializePassport from "./passport-config.js";
 import auth from "./routes/auth.js";
 import dashboard from "./routes/dashboard.js";
 import course from "./routes/course.js";
+import roleMiddleware from "./middleware/roleMiddleware.js";
 
 
 const app = express();
@@ -44,7 +45,7 @@ app.use(session({
     resave: false,
     saveUninitialized: false,
     cookie: {
-        maxAge: 600000,
+        maxAge: 600000000,  // 7 days
         
         
         sameSite: "lax"
@@ -68,6 +69,7 @@ app.get("/api", (req, res) => {
 app.use("/", auth);
 app.use("/", dashboard);
 app.use("/", course)
+app.use("/middleware", roleMiddleware); 
 // app.get("/api/check-auth", (req, res) => {
 //     if (req.isAuthenticated()) {
 //         res.json({isAuthenticated: true, user: req.user});

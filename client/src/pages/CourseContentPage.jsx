@@ -1,6 +1,6 @@
 import React from "react";
 import {useParams} from "react-router-dom";
-import CourseContent from "./CourseContent";
+import CourseContent from "../components/CourseContent";
 import { useAuth } from "../Routes/Auth";
 import axios from "axios";
 
